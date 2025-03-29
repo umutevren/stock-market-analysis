@@ -1,0 +1,178 @@
+.advanced-dashboard {
+  width: 100%;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid #eaeef3;
+  margin-bottom: 20px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.advanced-dashboard:hover {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.advanced-dashboard .dashboard-header {
+  padding: 20px;
+  background: linear-gradient(135deg, #4a6cf7, #2b50ed);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.advanced-dashboard .dashboard-header h3 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.3rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.advanced-dashboard .timeframe-selector {
+  display: flex;
+  gap: 8px;
+}
+
+.advanced-dashboard .timeframe-selector button {
+  border: none;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.advanced-dashboard .timeframe-selector button:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.advanced-dashboard .timeframe-selector button.active {
+  background-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.advanced-dashboard .dashboard-content {
+  padding: 24px;
+}
+
+.advanced-dashboard .price-chart-container,
+.advanced-dashboard .volume-chart-container {
+  margin-bottom: 30px;
+}
+
+.advanced-dashboard .price-chart-container h4,
+.advanced-dashboard .volume-chart-container h4 {
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.advanced-dashboard .loading-indicator {
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #5a6a85;
+  font-size: 1rem;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.advanced-dashboard .error-message,
+.advanced-dashboard .no-data-message {
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #5a6a85;
+  font-size: 1rem;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.advanced-dashboard .error-message {
+  color: #e53e3e;
+}
+
+.advanced-dashboard .dashboard-footer {
+  text-align: center;
+  padding: 15px 24px;
+  border-top: 1px solid #eaeef3;
+  background-color: #f8fafd;
+}
+
+.advanced-dashboard .dashboard-footer p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+/* Custom tooltip styles */
+.advanced-dashboard .custom-tooltip {
+  background-color: white;
+  border: 1px solid #eaeef3;
+  padding: 14px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.advanced-dashboard .tooltip-date {
+  margin: 0 0 6px;
+  color: #64748b;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.advanced-dashboard .tooltip-price,
+.advanced-dashboard .tooltip-volume {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.advanced-dashboard .tooltip-volume {
+  color: #10b981;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+@media (max-width: 768px) {
+  .advanced-dashboard .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .advanced-dashboard .timeframe-selector {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .advanced-dashboard .timeframe-selector button {
+    flex: 1;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+  
+  .advanced-dashboard .dashboard-content {
+    padding: 16px;
+  }
+  
+  .advanced-dashboard .price-chart-container h4,
+  .advanced-dashboard .volume-chart-container h4 {
+    font-size: 1rem;
+  }
+} 

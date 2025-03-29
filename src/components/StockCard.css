@@ -1,0 +1,104 @@
+.stock-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.stock-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.stock-header h2 {
+  font-size: 24px;
+  margin: 0;
+  color: #1f2937;
+}
+
+.current-price {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.current-price.up {
+  color: #059669;
+}
+
+.current-price.down {
+  color: #dc2626;
+}
+
+.price-change {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.price-change.up {
+  color: #059669;
+}
+
+.price-change.down {
+  color: #dc2626;
+}
+
+.time {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.stock-details {
+  margin-bottom: 20px;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.label {
+  color: #6b7280;
+}
+
+.value {
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.range-visualization {
+  margin-top: 20px;
+}
+
+.range-bar {
+  position: relative;
+  height: 30px;
+  background-color: #f3f4f6;
+  border-radius: 4px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.range-low, .range-high {
+  font-size: 12px;
+  color: #6b7280;
+  z-index: 1;
+}
+
+.range-current {
+  position: absolute;
+  height: 16px;
+  width: 4px;
+  background-color: #1e40af;
+  border-radius: 2px;
+  transform: translateX(-50%);
+} 

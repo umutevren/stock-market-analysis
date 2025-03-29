@@ -1,0 +1,234 @@
+.stock-chart {
+  padding: 0;
+}
+
+.chart-controls {
+  padding: 16px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.time-range-buttons, .chart-type-selector {
+  display: flex;
+  gap: 6px;
+}
+
+.chart-controls button {
+  padding: 8px 14px;
+  background-color: #f3f4f6;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 14px;
+  color: var(--medium-text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.chart-controls button:hover {
+  background-color: #e5e7eb;
+}
+
+.chart-controls button.active {
+  background-color: var(--primary-color);
+  border-color: var(--primary-dark);
+  color: white;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+
+.chart-container {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border-color);
+  min-height: 400px;
+}
+
+.combo-chart-container {
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.chart-stats .stat-item {
+  text-align: center;
+}
+
+.chart-stats .stat-label {
+  font-size: 12px;
+  color: var(--medium-text);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.chart-stats .stat-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dark-text);
+}
+
+.price-chart-container {
+  flex: 2;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
+}
+
+.volume-chart-container {
+  flex: 1;
+  margin-top: 10px;
+}
+
+.chart-loading {
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--medium-text);
+}
+
+.chart-loading p {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.chart-error {
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--danger-color);
+  font-size: 14px;
+  background-color: #fee2e2;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+}
+
+.chart-error p {
+  margin: 6px 0;
+}
+
+.error-details {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(220, 38, 38, 0.3);
+  color: #9b1c1c;
+  font-size: 13px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.no-data-message {
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--medium-text);
+  font-size: 14px;
+  background-color: #f9fafb;
+  border-radius: 8px;
+}
+
+.chart-info {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.data-source {
+  font-size: 13px;
+  color: var(--medium-text);
+  margin: 5px 0;
+  font-style: italic;
+}
+
+/* Custom Tooltip Styles */
+.custom-tooltip {
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: var(--card-shadow);
+  font-size: 12px;
+  min-width: 160px;
+}
+
+.tooltip-time {
+  font-weight: 600;
+  margin: 0 0 6px;
+  color: var(--medium-text);
+  font-size: 12px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 6px;
+}
+
+.tooltip-price {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 6px 0;
+  color: var(--dark-text);
+}
+
+.tooltip-details {
+  margin-top: 8px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 6px;
+}
+
+.tooltip-details p {
+  margin: 3px 0;
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+}
+
+.tooltip-details .label {
+  color: var(--medium-text);
+  margin-right: 12px;
+}
+
+.tooltip-details .value {
+  font-weight: 600;
+  color: var(--dark-text);
+}
+
+@media (max-width: 768px) {
+  .chart-controls {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .time-range-buttons, .chart-type-selector {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 5px;
+  }
+  
+  .chart-container {
+    padding: 15px;
+  }
+  
+  .combo-chart-container {
+    height: 420px;
+  }
+  
+  .chart-stats .stat-value {
+    font-size: 14px;
+  }
+} 
