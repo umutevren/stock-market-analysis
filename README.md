@@ -31,6 +31,9 @@ Currently tracking these popular stocks:
 - Tesla (TSLA)
 - Meta/Facebook (META)
 - Netflix (NFLX)
+- NVIDIA (NVDA)
+- JPMorgan Chase (JPM)
+- Berkshire Hathaway (BRK-B)
 
 More coming soon! (Drop me an issue if you have requests)
 
@@ -65,8 +68,22 @@ StockVision is built with:
 - **Moment.js**: For date and time formatting
 - **JavaScript/ES6+**: All the forecasting algorithms are written in vanilla JS
 
-In a production environment, this would connect to:
-- Yahoo Finance API or similar for real-time data
+### Backend Architecture
+
+The backend runs on:
+- **Python** with **Flask**: Lightweight server that handles data requests
+- **yfinance**: Python library that fetches real stock data from Yahoo Finance
+- **RESTful API**: Simple endpoints that deliver formatted stock information
+- **Data Processing**: Server-side calculations for technical indicators and base metrics
+
+I've set up the backend to optimize for speed and reliability. It retrieves real-time stock quotes, formats company profiles, and calculates various technical indicators before sending them to the frontend. The Python backend does the heavy lifting of data processing so the React frontend can focus on presenting clean visualizations.
+
+When the server fetches data from Yahoo Finance, it includes error handling to deal with API timeouts or rate limiting. All the data transformations happen server-side, which keeps the frontend code cleaner and more focused on the UI experience.
+
+In a production environment, you might want to add:
+- Data caching to reduce API calls
+- Authentication for user-specific features
+- Database integration for storing historical queries
 
 ## Local Development
 
@@ -76,13 +93,39 @@ If you want to play with this yourself:
 # Clone the repo
 git clone https://github.com/yourusername/stockvision.git
 
-# Install dependencies
+# Install frontend dependencies
 cd stockvision
 npm install
 
-# Start development server
+# Start React development server
 npm start
 ```
+
+### Setting up the Backend
+
+The application requires both the React frontend and Python backend to be running:
+
+```bash
+# Navigate to the backend directory
+cd backend
+
+# Create a virtual environment
+python -m venv venv
+
+# Activate the virtual environment
+# On Windows:
+venv\Scripts\activate
+# On macOS/Linux:
+source venv/bin/activate
+
+# Install backend dependencies
+pip install -r requirements.txt
+
+# Run the Flask server
+python app.py
+```
+
+The React app should connect to the backend automatically, which runs on port 5001 by default.
 
 ## What's Next?
 
