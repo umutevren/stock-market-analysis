@@ -79,25 +79,34 @@ body {
 
 /* Error Container */
 .error-container {
-  background-color: var(--card-bg);
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  padding: 2.5rem;
+  background-color: #fee2e2;
+  border: 1px solid #ef4444;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
   text-align: center;
-  margin: 2rem auto;
-  max-width: 600px;
-  border-top: 4px solid var(--error-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .error-container h2 {
-  color: var(--error-color);
-  margin-bottom: 1rem;
+  color: #dc2626;
+  margin-top: 0;
   font-size: 1.8rem;
 }
 
 .error-container p {
-  margin-bottom: 1rem;
-  color: var(--text-light);
+  margin: 10px 0;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.error-help {
+  font-size: 0.95rem;
+  background-color: #ffffff;
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin-top: 15px;
+  border-left: 4px solid #dc2626;
 }
 
 /* Welcome Container */
@@ -198,4 +207,50 @@ body {
   .welcome-description {
     font-size: 1rem;
   }
+}
+
+/* Add styles for the company selector */
+.company-selector {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.company-selector p {
+  margin-bottom: 0.8rem;
+  font-size: 1.1rem;
+  color: var(--text-color-light);
+  font-weight: 500;
+}
+
+.company-selector button {
+  background-color: var(--primary-color-dark);
+  color: var(--text-color-light);
+  border: 1px solid var(--primary-color);
+  padding: 0.5rem 1rem;
+  margin: 0.3rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.company-selector button:hover {
+  background-color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+.company-selector button.active {
+  background-color: var(--success-color);
+  color: #fff;
+  border-color: var(--success-color);
+  font-weight: bold;
+}
+
+/* Make sure the app content has enough padding if needed */
+.app-content {
+  padding-top: 20px; /* Adjust as needed */
+  padding-bottom: 60px; /* Ensure space above footer */
 } 

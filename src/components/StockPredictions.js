@@ -382,48 +382,75 @@ const StockPredictions = ({ symbol }) => {
       setError(null);
       
       try {
-        // Using a CORS proxy to access Yahoo Finance data
-        const proxyUrl = 'https://corsproxy.io/?';
-        const baseUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?`;
+        console.log(`Fetching historical data for ${symbol} with timeframe ${historyTimeframe}...`);
         
-        const params = new URLSearchParams({
-          interval: '1d', // Daily data
-          range: historyTimeframe // 3y, 5y, max
-        }).toString();
+        // --- Use local backend API for historical data ---
+        const backendHistoryUrl = `http://localhost:5001/api/history/${symbol}?range=${historyTimeframe}`;
+
+        const response = await axios.get(backendHistoryUrl);
         
-        const response = await axios.get(`${proxyUrl}${baseUrl}${params}`);
-        
-        if (response.data && response.data.chart && 
-            response.data.chart.result && 
-            response.data.chart.result[0]) {
-          
-          const result = response.data.chart.result[0];
-          const timestamps = result.timestamp || [];
-          const quotes = result.indicators.quote[0] || {};
-          const closes = quotes.close || [];
-          
-          // Format data for charts
-          const formattedData = timestamps.map((timestamp, index) => {
-            const date = new Date(timestamp * 1000);
-            
-            return {
-              date: date,
-              dateFormatted: moment(date).format('YYYY-MM-DD'),
-              close: closes[index] || null,
-              type: 'historical'
-            };
-          }).filter(item => item.close !== null);
-          
-          setHistoricalData(formattedData);
-          
-          // Generate predictions based on historical data
-          generatePredictions(formattedData);
-        } else {
-          throw new Error('Invalid data format from Yahoo Finance API');
+        // Check if response contains error
+        if (!response.data) {
+           throw new Error(`No historical data returned from backend for symbol ${symbol}.`);
         }
+        
+        if (response.data.error) {
+           throw new Error(response.data.error);
+        }
+        
+        // Data comes pre-formatted from the backend, but needs date conversion
+        const formattedData = response.data.map(item => ({
+          ...item,
+          date: new Date(item.date) // Convert ISO string back to Date object
+        }));
+        
+        // Filter out any potential null close prices just in case
+        const validData = formattedData.filter(item => 
+          item.close !== null && 
+          !isNaN(item.close) && 
+          item.date instanceof Date && 
+          !isNaN(item.date.getTime())
+        );
+        
+        console.log(`Received ${validData.length} valid data points for ${symbol}`);
+        
+        if (validData.length === 0) {
+             throw new Error('No valid historical data points received from backend.');
+        }
+
+        setHistoricalData(validData);
+        generatePredictions(validData); // Pass the data with Date objects
+        
       } catch (err) {
         console.error('Error fetching historical data:', err);
-        setError('Failed to load historical data. Please try again later.');
+        
+        let errorMessage = `Failed to load historical data for ${symbol}.`;
+        
+        // Handle specific error messages from our backend
+        if (err.response?.data?.error) {
+          errorMessage = err.response.data.error;
+        } 
+        // Handle specific error message formats
+        else if (err.message && (
+          err.message.includes('No historical data') || 
+          err.message.includes('No valid historical data') ||
+          err.message.includes('No data found')
+        )) {
+          errorMessage = err.message;
+        } 
+        // Handle HTTP status codes
+        else if (axios.isAxiosError(err)) {
+          if (err.response?.status === 404) {
+            errorMessage = `Historical data for symbol ${symbol} not found.`;
+          } else if (err.response?.status === 500) {
+            errorMessage = `Server error fetching historical data. Please try again later.`;
+          } else if (!err.response && err.request) {
+            // Network error - can't reach backend
+            errorMessage = `Could not connect to backend server. Please ensure the Python backend is running.`;
+          }
+        }
+        
+        setError(errorMessage);
       } finally {
         setLoading(false);
       }
@@ -703,13 +730,15 @@ const StockPredictions = ({ symbol }) => {
                   {/* Reference line for today */}
                   <ReferenceLine 
                     x={historicalData[historicalData.length - 1]?.dateFormatted} 
-                    stroke="#888888" 
-                    strokeDasharray="3 3"
-                    label={{ 
+                    stroke="#333333"
+                    strokeWidth={1.5}
+                    strokeDasharray="5 5"
+                    label={{
                       value: 'Today',
                       position: 'insideTopRight',
-                      fill: '#888888',
-                      fontSize: 12
+                      fill: '#333333',
+                      fontSize: 13,
+                      fontWeight: 'bold'
                     }}
                   />
                 </AreaChart>

@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react';
 import './StockDashboard.css';
 import StockOverview from './StockOverview';
 import CompanyInfo from './CompanyInfo';
-import NewsPanel from './NewsPanel';
 import TechnicalAnalysis from './TechnicalAnalysis';
 import AdvancedDashboard from './AdvancedDashboard';
 import StockPredictions from './StockPredictions';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
-const StockDashboard = ({ symbol, quote, profile, news, apiKey }) => {
+const StockDashboard = ({ symbol, quote, profile, apiKey }) => {
   const [formattedQuote, setFormattedQuote] = useState(null);
   
   // Format quote data for display
@@ -50,19 +49,6 @@ const StockDashboard = ({ symbol, quote, profile, news, apiKey }) => {
         )}
       </div>
       
-      <div className="company-selector">
-        <span className="selector-label">Select Company:</span>
-        <div className="company-buttons">
-          <button className={symbol === 'AAPL' ? 'active' : ''} onClick={() => window.stockApp.changeCompany('AAPL')}>AAPL</button>
-          <button className={symbol === 'MSFT' ? 'active' : ''} onClick={() => window.stockApp.changeCompany('MSFT')}>MSFT</button>
-          <button className={symbol === 'GOOGL' ? 'active' : ''} onClick={() => window.stockApp.changeCompany('GOOGL')}>GOOGL</button>
-          <button className={symbol === 'AMZN' ? 'active' : ''} onClick={() => window.stockApp.changeCompany('AMZN')}>AMZN</button>
-          <button className={symbol === 'TSLA' ? 'active' : ''} onClick={() => window.stockApp.changeCompany('TSLA')}>TSLA</button>
-          <button className={symbol === 'META' ? 'active' : ''} onClick={() => window.stockApp.changeCompany('META')}>META</button>
-          <button className={symbol === 'NFLX' ? 'active' : ''} onClick={() => window.stockApp.changeCompany('NFLX')}>NFLX</button>
-        </div>
-      </div>
-      
       <div className="dashboard-grid">
         <StockOverview symbol={symbol} quote={formattedQuote} />
         
@@ -72,7 +58,6 @@ const StockDashboard = ({ symbol, quote, profile, news, apiKey }) => {
             <Tab>Technical</Tab>
             <Tab>Predictions</Tab>
             <Tab>Company Info</Tab>
-            <Tab>News</Tab>
           </TabList>
           
           <TabPanel>
@@ -89,10 +74,6 @@ const StockDashboard = ({ symbol, quote, profile, news, apiKey }) => {
           
           <TabPanel>
             <CompanyInfo profile={profile} symbol={symbol} />
-          </TabPanel>
-          
-          <TabPanel>
-            <NewsPanel news={news} />
           </TabPanel>
         </Tabs>
       </div>
